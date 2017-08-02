@@ -12,8 +12,12 @@ V=zeros(6,1);
 visited=zeros(6,2);
 %% the loop for episode
 for episode_no=1:ep,
-    state=randi([2 5],1,1);
-    action=randi([1 2],1,1);
+    state=randi([2 5],1,1);    
+    if(rand>epsilon)
+        [value,action]=max(Q(state,:));
+    else
+        action=randi([1 2],1,1);    
+    end    
     episode=state;
     steps(episode_no)=0;
     %% the loop for each step of the episode
@@ -30,9 +34,9 @@ for episode_no=1:ep,
        V(state)=V(state)+beta*(reward+(gamma*V(nextstate))-V(state));       
        state=nextstate;
        action=nextaction;
-       visited(state,action)=visited(state,action)+1;     
-       epsilon=0.99*epsilon;
+       visited(state,action)=visited(state,action)+1;           
     end
+    epsilon=0.99*epsilon;
     disp(['Episode #' num2str(episode_no) ':']);
     disp(episode);
     disp(['Qs in Episode #' num2str(episode_no) ':']);
