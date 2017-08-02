@@ -11,11 +11,9 @@ for episode_no=1:ep,
     state=s;
     episode=s;
     %% the loop for each step of the episode
-    while(state~=1 && state~=6)
-       %action=sum(rand >= cumsum([0, p_s_a(state,1), p_s_a(state,2)]));
+    while(state~=1 && state~=6)      
        action=randi([1 2],1,1);
        [nextstate,reward]=garbageEnv(action,state);
-%        rewards=reward;
        episode=[episode,nextstate];
        V(state)=V(state)+alpha*(reward+(gamma*V(nextstate))-V(state));
        state=nextstate;
