@@ -26,9 +26,9 @@ for episode_no=1:ep,
        Q(state,action)=Q(state,action)+alpha*(reward+(gamma*max(Q(nextstate,:)))-Q(state,action));
        state=nextstate;
        
-       visited(state,action)=visited(state,action)+1;     
-       epsilon=0.999*epsilon;
+       visited(state,action)=visited(state,action)+1;            
     end
+    epsilon=0.999*epsilon;
     disp(['Episode #' num2str(episode_no) ':']);
     disp(episode);
     disp(['Qs in Episode #' num2str(episode_no) ':']);
